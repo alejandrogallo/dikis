@@ -39,11 +39,11 @@ class Dictionary:
     def __init__(self, name):
         self.name = name
 
-    def lookup(word):
+    def lookup(self, word):
         raise NotImplementedError
 
-    def header_formater(word):
+    def header_formater(self, word):
         raise NotImplementedError
 
-    def prompt_formater(word):
+    def prompt_formater(self, word):
         raise NotImplementedError

@@ -5,7 +5,6 @@ import aramorph.transliterate
 import aramorph.analyser
 
 
-
 class Dictionary(dikis.dicts.Dictionary):
 
     def __init__(self):
