@@ -105,7 +105,7 @@ class Gui(Gtk.Window):
         self.dictionary = dictionary
 
         self.set_decorated(False)
-        self.set_title('Papis gtk picker')
+        self.set_title('Dikis ' + self.dictionary.name)
 
         self.connect("key-press-event", self.handle_key)
 
