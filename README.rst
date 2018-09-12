@@ -1,6 +1,10 @@
 ===================
 Dikis: a dictionary
 ===================
+That does not get to my nerves
+------------------------------
+
+
 .. image:: https://img.shields.io/pypi/v/dikis.svg
    :alt: Dikis: a dictionary on the Python Package Index
    :target: https://pypi.python.org/pypi/dikis
