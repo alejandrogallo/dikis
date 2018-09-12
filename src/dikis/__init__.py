@@ -5,6 +5,7 @@ import logging
 import click
 from click import echo
 import dikis.app
+import dikis.dicts
 
 
 __version__ = '0.1.0'
@@ -15,7 +16,8 @@ __version__ = '0.1.0'
 @click.version_option(version=__version__)
 @click.option(
     '-d', '--dic',
-    help='Dictinoary to use'
+    help='Dictinoary to use',
+    default='aramorph'
 )
 @click.option(
     '--debug',
@@ -30,8 +32,9 @@ def main(debug, dic):
         logger.setLevel(logging.DEBUG)
         logger.debug("Enabled debug output")
 
+    dikis.dicts.set_dict_from_name(dic)
+
 
 @main.command('gui')
 def gui():
-    gui = dikis.app.Gui()
-    gui.run()
+    dikis.app.Gui(dikis.dicts.get_dict())

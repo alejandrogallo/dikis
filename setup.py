@@ -18,7 +18,10 @@ def get_version(filename):
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-requirements = ['Click']
+requirements = [
+    'Click',
+    'configparser'
+]
 
 dev_requirements = [
     'coverage', 'pytest', 'pytest-cov', 'pytest-xdist', 'twine', 'pep8',

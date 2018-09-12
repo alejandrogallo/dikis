@@ -4,20 +4,7 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Pango
 
-import aramorph
-import aramorph.transliterate
-import aramorph.analyser
-
 import re
-
-def header_filter(match):
-    # {'word': 'سل', 'vowelled': 'سَلَّ', 'root': 'سل', 'pos': 'Perfect verb',
-            # 'transliteration': 'salla', 'gloss': 'withdraw + he/it <verb>'}
-    return """\
-{w[word]} {w[vowelled]} /{w[transliteration]}/
-        <{w[pos]}> Root: {w[root]}
-    {w[gloss]}
-""".format(w=match)
 
 
 pangoFont = Pango.FontDescription("15")
@@ -25,11 +12,11 @@ pangoFont = Pango.FontDescription("15")
 
 class ListElement(Gtk.Label):
 
-    def __init__(self, word):
+    def __init__(self, word, header_formater):
         Gtk.Label.__init__(self)
         self.modify_font(pangoFont)
         self.word = word
-        self.set_text(header_filter(self.word))
+        self.set_text(header_formater(self.word))
         self.set_yalign(0.0)
         self.set_xalign(0.00)
         self.set_line_wrap(10.0)
@@ -45,10 +32,11 @@ class ListElement(Gtk.Label):
 
 class ElementList(Gtk.ListBox):
 
-    def __init__(self, search_widget):
+    def __init__(self, search_widget, header_formater):
         Gtk.ListBox.__init__(self)
 
         self.search_widget = search_widget
+        self.header_formater = header_formater
 
         self.connect("key-press-event", self.handle_key)
 
@@ -68,7 +56,7 @@ class ElementList(Gtk.ListBox):
 
     def update(self, words):
         for doc in words:
-            el = ListElement(doc)
+            el = ListElement(doc, self.header_formater)
             self.add(el)
             el.show()
 
@@ -111,10 +99,10 @@ def key_pressed_is(event, key_string):
 
 
 class Gui(Gtk.Window):
-    def __init__(self, header_filter=None):
+    def __init__(self, dictionary):
 
         Gtk.Window.__init__(self)
-        self.analyser = aramorph.analyser.get_analyser()
+        self.dictionary = dictionary
 
         self.set_decorated(False)
         self.set_title('Papis gtk picker')
@@ -135,7 +123,7 @@ class Gui(Gtk.Window):
         self.prompt = Gtk.Label()
         self.prompt.modify_font(pangoFont)
 
-        self.listbox = ElementList(self.entry)
+        self.listbox = ElementList(self.entry, self.dictionary.header_formater)
 
         vbox = Gtk.VBox()
         s = Gtk.ScrolledWindow()
@@ -167,14 +155,15 @@ class Gui(Gtk.Window):
 
     def handle_entry_key(self, w, el):
         self.listbox.invalidate_filter()
-        options = self.analyser.analyse(
-            self.entry.get_text()
-        )
+        options = self.dictionary.lookup(self.entry.get_text())
         self.listbox.clear()
         self.listbox.update(options)
-        self.prompt.set_text(
-            aramorph.transliterate.b2u(self.entry.get_text())
-        )
+        try:
+            self.prompt.set_text(
+                self.dictionary.prompt_formater(self.entry.get_text())
+            )
+        except NotImplementedError:
+            pass
 
     def handle_key(self, w, event):
         if key_pressed_is(event, '<ctrl-f>'):
