@@ -1,3 +1,6 @@
+import re
+import os
+import glob
 
 
 _CURRENT_DICT = None
@@ -32,6 +35,15 @@ def set_dict(dictionary):
 def set_dict_from_name(dict_name):
     dic = get_dict_from_name(dict_name)
     set_dict(dic)
+
+
+def list_dictionary_names():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    names = []
+    for n in os.listdir(current_dir):
+        if not re.match(r"^_.*", n):
+            names.append(n.replace('.py', ''))
+    return names
 
 
 class Dictionary:

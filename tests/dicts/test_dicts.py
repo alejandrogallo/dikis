@@ -38,3 +38,12 @@ def test_base_dict():
         assert(True)
     else:
         assert(False)
+
+
+def test_list():
+    names = list_dictionary_names()
+    assert(names)
+    assert('__init__.py' not in names)
+    assert('__init__' not in names)
+    assert('aramorph' in names)
+    assert('en2he' in names)
