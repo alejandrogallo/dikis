@@ -20,7 +20,7 @@ with open('README.rst') as readme_file:
 
 requirements = [
     'Click',
-    'configparser'
+    'configparser',
 ]
 
 dev_requirements = [

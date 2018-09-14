@@ -34,4 +34,13 @@ def main(debug, dic):
 
 @main.command('gui')
 def gui():
+    """Start the graphical user interface
+    """
     dikis.app.Gui(dikis.dicts.get_dict())
+
+
+@main.command('list')
+def list():
+    """List available dictionaries"""
+    for d in dikis.dicts.list_dictionary_names():
+        print(d)
