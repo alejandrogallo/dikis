@@ -49,6 +49,7 @@ setup(
     install_requires=requirements,
     extras_require={
         'dev': dev_requirements,
+        'hebrew': 'milon>=0.0.1',
     },
     license="GNU General Public License v3",
     long_description=readme,
