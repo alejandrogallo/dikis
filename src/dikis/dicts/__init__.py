@@ -1,6 +1,5 @@
 import re
 import os
-import glob
 
 
 _CURRENT_DICT = None

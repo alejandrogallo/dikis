@@ -1,9 +1,6 @@
-
-import sys
 import logging
 
 import click
-from click import echo
 import dikis.app
 import dikis.dicts
 

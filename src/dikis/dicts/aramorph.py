@@ -19,9 +19,9 @@ class Dictionary(dikis.dicts.Dictionary):
 
     def header_formater(self, word):
         # {'word': 'سل', 'vowelled': 'سَلَّ', 'root': 'سل', 'pos': 'Perfect verb',
-                # 'transliteration': 'salla', 'gloss': 'withdraw + he/it <verb>'}
+        # 'transliteration': 'salla', 'gloss': 'withdraw + he/it <verb>'}
         return """\
 {w[word]} {w[vowelled]} /{w[transliteration]}/
-        <{w[pos]}> Root: {w[root]}
-    {w[gloss]}
+<{w[pos]}> Root: {w[root]}
+{w[gloss]}
 """.format(w=word)

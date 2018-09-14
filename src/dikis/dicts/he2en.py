@@ -1,6 +1,3 @@
-import re
-import os
-import json
 import dikis.dicts
 from milon.dictionaries import DictionaryHeEn
 from milon.transliteration import ascii_to_unicode

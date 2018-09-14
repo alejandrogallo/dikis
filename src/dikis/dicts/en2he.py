@@ -1,6 +1,3 @@
-import re
-import os
-import json
 import dikis.dicts
 from milon.dictionaries import DictionaryEnHe
 
@@ -21,4 +18,3 @@ class Dictionary(dikis.dicts.Dictionary):
 {w[inflections]}
 {w[samples]}
 """.format(w=word)
-

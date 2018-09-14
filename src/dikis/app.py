@@ -4,8 +4,6 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Pango
 
-import re
-
 
 pangoFont = Pango.FontDescription("15")
 
